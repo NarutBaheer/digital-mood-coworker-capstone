@@ -1,88 +1,75 @@
-# Wellness_Journal
-A full-stack project (React + Tailwind frontend, Node.js + Express + MongoDB backend, and a small Python sentiment analysis training script) that lets users log daily moods and short journal notes, visualizes mood trends, and performs sentiment analysis on entries.
+# Digital Mood Co-Worker  
+**Full-Stack Capstone Project**
 
-## Project structure
-       wellness_journal/
-       ├─ README.md
-       ├─ .gitignore
-       ├─ .env.example
-       ├─ docker-compose.yml
-       ├─ dataset/
-       │  └─ mood_dataset.csv
-       ├─ backend/
-       │  ├─ package.json
-       │  ├─ .env.example
-       │  ├─ server.js
-       │  ├─ models/
-       │  │  ├─ User.js
-       │  │  └─ Entry.js
-       │  ├─ routes/
-       │  │  ├─ auth.js
-       │  │  └─ entries.js
-       │  └─ middleware/
-       │     └─ auth.js
-       ├─ frontend/
-       │  ├─ package.json
-       │  ├─ index.html
-       │  ├─ vite.config.js
-       │  ├─ postcss.config.cjs
-       │  ├─ tailwind.config.cjs
-       │  └─ src/
-       │     ├─ main.jsx
-       │     ├─ App.jsx
-       │     ├─ styles.css
-       │     └─ components/
-       │        ├─ JournalForm.jsx
-       │        └─ MoodChart.jsx
-       └─ ml/
-          ├─ requirements.txt
-          └─ train_sentiment.py
+Digital Mood Co-Worker is a full-stack web application that allows users to track daily moods, reflect through journaling, and visualize emotional trends over time. The application includes secure authentication (email/password and Google OAuth), personalized dashboards, and interactive data visualizations.
 
-## Features
-- User signup / login (JWT)
-- Add / view / delete journal entries (date, mood score, text)
-- Sentiment analysis script to train a simple model on the included dataset
-- Charts and a modern responsive UI (React + Tailwind)
-- Clear README, env examples, and many files to present as a production-like repo
+This project was developed as an **individual full-stack capstone project** and demonstrates modern software engineering practices using React, Express, MongoDB, OAuth, and cloud deployment.
 
-## Quick start (local)
+---
 
-1. Clone or extract the project.
-2. Install backend dependencies:
+## 🔗 Live Links
 
-       cd backend
-       npm install
-       # create .env (see .env.example) and set MONGODB_URI and JWT_SECRET
-       node server.js
-   
-4. Install frontend:
+- **Frontend (React):**  
+  _Add deployed frontend URL_
 
-       cd ../frontend
-       npm install
-        npm run dev
-       # open http://localhost:3000
+- **Backend (Express API):**  
+  _Add deployed backend URL_
 
-4. (Optional) Train the sentiment model:
+- **Video Demo:**  
+  _Add demo video link_
 
-       cd ../ml
-       python3 -m venv venv
-       source venv/bin/activate
-       pip install -r requirements.txt
-       python train_sentiment.py
+---
 
-## Structure
+## ✨ Features
 
-backend/   -> Node.js + Express API
+- Secure authentication:
+  - Email & password login
+  - Google OAuth login
+- Personalized user dashboard after login
+- Mood tracking using a 0–10 scale
+- Journal notes attached to mood entries
+- Interactive mood visualization chart
+- Motivational quote displayed dynamically
+- Responsive UI with animations and visual feedback
 
-frontend/  -> React + Vite + Tailwind UI
+---
 
-ml/        -> Simple scikit-learn training script + dataset
+## 🧠 Architecture Overview
 
-dataset/   -> CSV used by ML script
+### Frontend
+- React (Vite)
+- Context API + `useReducer`
+- Google OAuth (`@react-oauth/google`)
+- Third-party charting library
+- Tailwind CSS + custom animations
 
+### Backend
+- Express.js
+- MongoDB with Mongoose
+- JWT-based authentication
+- Google OAuth token verification
+- RESTful API with full CRUD functionality
 
-## Notes
+---
 
-This is a starter project. It may expand features (OAuth, deployment, mobile app).
+## 🔄 Design Artifact (Sequence Diagram)
 
-Make sure to fill *.env* values before running backend.
+```mermaid
+sequenceDiagram
+  participant U as User
+  participant R as React App
+  participant E as Express API
+  participant M as MongoDB
+  participant Q as External Quote API
+
+  U->>R: Login (Email or Google)
+  R->>E: POST /api/auth/*
+  E->>R: JWT Token
+  R->>E: GET /api/entries
+  E->>M: Fetch user entries
+  M->>E: Entries data
+  E->>R: JSON entries
+  R->>E: Request quote
+  E->>Q: Fetch quote
+  Q->>E: Quote
+  E->>R: Display quote

@@ -1,0 +1,7 @@
+runtime: nodejs22
+entrypoint: node server.js
+
+env_variables:
+  NODE_ENV: "production"
+  MONGODB_URI: "YOUR_ATLAS_CONNECTION_STRING"
+  JWT_SECRET: "YOUR_LONG_RANDOM_SECRET"

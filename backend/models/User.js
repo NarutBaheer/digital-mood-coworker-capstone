@@ -1,9 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  passwordHash: { type: String, required: true }
-}, { timestamps: true });
+const UserSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
 
-module.exports = mongoose.model('User', UserSchema);
+    // Local auth (optional if Google user)
+    passwordHash: { type: String },
+
+    // Google auth
+    googleId: { type: String },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("User", UserSchema);
