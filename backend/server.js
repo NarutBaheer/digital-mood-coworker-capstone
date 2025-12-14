@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const path = require("path");
+//const path = require("path");
 
 dotenv.config();
 
@@ -33,13 +33,18 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/entries", require("./routes/entries"));
 
 // Serve React build files from dist/
-const distPath = path.join(__dirname, "dist");
-app.use(express.static(distPath));
+//const distPath = path.join(__dirname, "dist");
+//app.use(express.static(distPath));
 
 // For any non-API route, send back React's index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
+//app.get("*", (req, res) => {
+//  res.sendFile(path.join(distPath, "index.html"));
+//});
+app.get("/", (req, res) => {
+  res.send("digital-mood-backend is running");
 });
+
+
 
 // Use the port provided by the environment or 4000 locally
 const PORT = process.env.PORT || 4000;
